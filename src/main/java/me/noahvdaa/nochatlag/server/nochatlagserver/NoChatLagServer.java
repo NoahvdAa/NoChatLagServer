@@ -7,14 +7,23 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
 
-public final class NoChatLagServer extends JavaPlugin {
+public final class NoChatLagServer extends JavaPlugin implements Listener {
+
+	// Technically not an invisible character, but a greek tonos is the closest we'll get in Minecraft.
+	private static final String INVISIBLE_CHARACTER = "\u0384";
 
 	@Override
 	public void onEnable() {
+		saveDefaultConfig();
+
 		ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
 
 		protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Server.CHAT) {
@@ -25,6 +34,20 @@ public final class NoChatLagServer extends JavaPlugin {
 				event.setPacket(packet);
 			}
 		});
+
+		getServer().getPluginManager().registerEvents(this, this);
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+	public void onAsyncPlayerChat(AsyncPlayerChatEvent e) {
+		if (!getConfig().getBoolean("invisibleNameCharacter", true)) return;
+
+		String format = e.getFormat();
+		// They aren't using the vanilla format!
+		if (!format.contains("<%1$s>")) return;
+
+		format = format.replaceAll("<%1\\$s>", "<" + INVISIBLE_CHARACTER + "%1\\$s>");
+		e.setFormat(format);
 	}
 
 }

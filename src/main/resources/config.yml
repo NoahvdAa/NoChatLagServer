@@ -1,0 +1,6 @@
+# When the vanilla client can't detect the player from the chat message packet itself, it'll try to fall back by attempting
+# to find the username of the player that sent the message. This setting adds an almost invisible character in front of the
+# player's name, so the client can't match the username (it looks for the text in between < and >).
+# If you use a non-standard chat format (default is <username> message), this setting will do NOTHING.
+# This setting may break bots and mods attempting to find the author of a message by parsing the chat.
+invisibleNameCharacter: true
