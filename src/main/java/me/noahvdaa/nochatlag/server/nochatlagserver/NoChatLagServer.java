@@ -26,9 +26,12 @@ public final class NoChatLagServer extends JavaPlugin implements Listener {
 
 		ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
 
-		protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Server.CHAT) {
+		// Some very naughty plugins are making changes in the MONITOR priority, so we unfortunately have to too. >:(
+		protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.MONITOR, PacketType.Play.Server.CHAT) {
 			@Override
 			public void onPacketSending(PacketEvent event) {
+				if (event.isCancelled()) return;
+				event.setReadOnly(false);
 				PacketContainer packet = event.getPacket();
 				packet.getUUIDs().write(0, new UUID(0L, 0L));
 				event.setPacket(packet);
