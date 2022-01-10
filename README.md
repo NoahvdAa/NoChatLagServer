@@ -1,5 +1,7 @@
 # NoChatLagServer
 
+[Fabric Version](https://github.com/NoahvdAa/NoChatLag) | [Forge Version](https://github.com/NoahvdAa/NoChatLagForge)
+
 Downloads: [SpigotMC](https://www.spigotmc.org/resources/nochatlagserver.99046/) | [GitHub Releases](https://github.com/NoahvdAa/NoChatLagServer/releases/tag/1.0.0)
 
 NoChatLagServer fixes [WEB-5587](https://bugs.mojang.com/browse/WEB-5587) by setting the sender-uuid to that of the server for every chat message.
