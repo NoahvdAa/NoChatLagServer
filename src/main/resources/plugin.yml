@@ -1,7 +1,7 @@
 name: NoChatLagServer
 version: '${version}'
-main: me.noahvdaa.nochatlag.server.nochatlagserver.NoChatLagServer
-api-version: 1.17
+main: me.noahvdaa.nochatlag.server.NoChatLagServer
+api-version: 1.13
 depend: [ ProtocolLib ]
 authors: [ NoahvdAa ]
 description: NoChatLag fixes MC-247973 by not removing the sender UUID from the chat packet. Please note that this breaks the vanilla client side block list.

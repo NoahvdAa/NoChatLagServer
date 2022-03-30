@@ -1,4 +1,4 @@
-package me.noahvdaa.nochatlag.server.nochatlagserver;
+package me.noahvdaa.nochatlag.server;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
